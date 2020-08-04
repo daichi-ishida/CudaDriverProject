@@ -16,7 +16,7 @@ class Display
 {
 public:
     Display(){}
-    virtual ~Display(){}
+    ~Display(){}
 
     void createWindow();
     void updateWindow();
