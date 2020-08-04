@@ -20,8 +20,8 @@ int main()
 
     // --- Test ---
 
-    CuFunctionsManager::getInstance().loadModule("kernel.ptx");
-    CUfunction addFunc = CuFunctionsManager::getInstance().getCuFunction("kernel.ptx", "addKernel");
+    CuFunctionsManager::getInstance().loadModule("kernel");
+    CUfunction addFunc = CuFunctionsManager::getInstance().getCuFunction("kernel", "addKernel");
 
     constexpr size_t length = 5;
     CUdeviceptr arrayAd, arrayBd, arrayCd;

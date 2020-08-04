@@ -19,7 +19,7 @@ public:
     static void create(const CUdevice device);
     static void destroy();
 
-    void loadModule(const std::string name);
+    void loadModule(const std::string& name);
 
     CUfunction& getCuFunction(const std::string& module_name, const std::string& function_name);
     static CUcontext cu_context;

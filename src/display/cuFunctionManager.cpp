@@ -37,11 +37,12 @@ void CuFunctionsManager::destroy()
     }
 }
 
-void CuFunctionsManager::loadModule(const std::string name)
+void CuFunctionsManager::loadModule(const std::string& name)
 {
     CUmodule cu_module;
 
-    CUresult res = cuModuleLoad(&cu_module, name.c_str());
+    std::string filename = name + ".ptx";
+    CUresult res = cuModuleLoad(&cu_module, filename.c_str());
     assert(res == CUDA_SUCCESS && "Can't load module");
 
     modules_[name] = cu_module;
