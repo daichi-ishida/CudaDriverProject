@@ -5,6 +5,8 @@ set(PROJECT_NAME_APP "${PROJECT_NAME}App")
 set(PROJECT_NAME_PTX "${PROJECT_NAME}PTX")
 project(${PROJECT_NAME} LANGUAGES CUDA CXX)
 
+set(CMAKE_CUDA_ARCHITECTURES 52)
+
 # ------------------------------------------------------------------------------
 # Set global variables
 # ------------------------------------------------------------------------------

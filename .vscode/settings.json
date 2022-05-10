@@ -85,6 +85,7 @@
         "shared_mutex": "cpp",
         "typeindex": "cpp",
         "variant": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "stop_token": "cpp"
     }
 }
