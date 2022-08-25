@@ -16,8 +16,8 @@
                 },
                 "CMAKE_TOOLCHAIN_FILE": {
                     "value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
-                     "type": "FILEPATH"
-                  }
+                    "type": "FILEPATH"
+                }
             },
             "condition": {
                 "type": "equals",
@@ -33,6 +33,10 @@
                 "value": "x64",
                 "strategy": "external"
             },
+            "toolset": {
+                "value": "host=x64",
+                "strategy": "external"
+            },
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug"
             }
@@ -41,6 +45,14 @@
             "name": "win-x64-release",
             "displayName": "win x64 Release",
             "inherits": "win-x64-debug",
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            },
+            "toolset": {
+                "value": "host=x64",
+                "strategy": "external"
+            },
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release"
             }
@@ -72,24 +84,44 @@
             "generator": "Ninja Multi-Config",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
-              "CMAKE_MAKE_PROGRAM": "ninja",
-              "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/cmake/clang.cmake",
-              "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}"
+                "CMAKE_MAKE_PROGRAM": "ninja",
+                "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/cmake/clang.cmake",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}"
+            }
+        },
+        {
+            "name": "gcc-linux-debug",
+            "displayName": "Configure debug build with GCC for Linux",
+            "description": "Using gcc/g++ compilers",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "gcc-linux-release",
+            "displayName": "Configure release build with GCC for Linux",
+            "description": "Using gcc/g++ compilers",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}",
+                "CMAKE_BUILD_TYPE": "Release"
             }
         }
     ],
     "buildPresets": [
         {
             "name": "debug",
-            "description": "Debug build with Clang for Linux",
-            "displayName": "Debug Clang Linux",
+            "description": "Debug build for Linux",
+            "displayName": "Debug Linux",
             "configurePreset": "clang-linux",
             "configuration": "Debug"
         },
         {
             "name": "release",
-            "description": "Release build with Clang for Linux",
-            "displayName": "Release Clang Linux",
+            "description": "Release build for Linux",
+            "displayName": "Release Linux",
             "configurePreset": "clang-linux",
             "configuration": "Release"
         }
