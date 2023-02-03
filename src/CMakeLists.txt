@@ -10,10 +10,11 @@ add_subdirectory("kernels")
 # ------------------------------------------------------------------------------
 add_executable(${PROJECT_NAME_APP})
 
-file(GLOB CXX_HEADERS *.h *.hpp)
-file(GLOB CXX_SOURCES *.cpp)
-set(CXX_FILES ${CXX_HEADERS} ${CXX_SOURCES})
+file(GLOB_RECURSE CXX_SOURCES *.cpp)
+set(CXX_FILES ${CXX_SOURCES})
 target_sources(${PROJECT_NAME_APP} PRIVATE ${CXX_FILES})
+
+set_target_properties(${PROJECT_NAME_APP} PROPERTIES CUDA_ARCHITECTURES "61")
 
 target_link_libraries(${PROJECT_NAME_APP} CUDA::cuda_driver OpenGL::GL glfw)
 target_include_directories(${PROJECT_NAME_APP} PRIVATE ${COMMON_INCLUDE_DIRS})
@@ -55,12 +56,5 @@ add_dependencies(${PROJECT_NAME_APP} ${PROJECT_NAME_PTX})
 # Post Process (copy shared files)
 # ------------------------------------------------------------------------------
 
-# These are run every time the main project is built:
-add_custom_target(${PROJECT_NAME} ALL)
-# Tell Visual Studio how to start the application:
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    VS_DEBUGGER_WORKING_DIRECTORY $<TARGET_FILE_DIR:${PROJECT_NAME_APP}>
-    VS_DEBUGGER_COMMAND $<TARGET_FILE:${PROJECT_NAME_APP}>)
-    
 add_custom_command(TARGET ${PROJECT_NAME_APP} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_OBJECTS:${PROJECT_NAME_PTX}> $<TARGET_FILE_DIR:${PROJECT_NAME_APP}> COMMAND_EXPAND_LISTS)
